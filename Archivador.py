@@ -23,24 +23,24 @@ class GestionadorArchivos:
     def rutaHexa(self, rutaHexa):
         self._rutaHexa = rutaHexa
 
-    def crear_archivos(self):
+    def crear_archivo(self):
         """Este metodo se encarga de crear los archivos necesarios
         en formato txt, el primero donde se colocará el código ensamblador
         y el segundo donde se colocará la traducción al código hexadecimal"""
 
         if os.path.exists(self._rutaEnsa):
             print(f'Archivo {self._rutaEnsa} encontrado...')
-        else:
-            f = open(self._rutaEnsa, 'x', encoding='utf8')
-            f.close()
-            print(f'Archivo {self._rutaEnsa} generado...')
 
-        if os.path.exists(self._rutaHexa):
-            print(f'Archivo {self._rutaHexa} encontrado...')
+            if os.path.exists(self._rutaHexa):
+                print(f'Archivo {self._rutaHexa} encontrado...')
+            else:
+                f = open(self._rutaHexa, 'x', encoding='utf8')
+                f.close()
+                print(f'Archivo {self._rutaHexa} generado...')
         else:
-            f = open(self._rutaHexa, 'x', encoding='utf8')
-            f.close()
-            print(f'Archivo {self._rutaHexa} generado...')
+            print(f'Archivo {self._rutaEnsa} no existe...')
+
+
 
     def leer_archivo(self):
         lista = []
