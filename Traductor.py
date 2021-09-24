@@ -1,3 +1,20 @@
+"""
+Este archivo contiene la clase Traductor, dicha clase se encarga de hacer
+todo el procedimiento de analisis del codigo fuente. Recibe una lista que
+contiene el codigo fuente con los mnemonicos de la hoja de datos, y devuelve 
+una lista con los codigos hexadecimales correspondientes a cada instruccion.
+Este es el archivo que ejecuta las funciones principales del programa.
+
+NOTAS, LISTAS DE CAMBIOS Y DEMAS:
+    *Añadiendo funcionalidad de distinguir mayusculas y minusculas para 
+     posteriormente poder utilizar variables distintas entre si.
+    *Añadiendo funcionalidad de detectar etiquetas.
+
+
+"""
+
+#Se importa la biblioteca del sistema operativo actual para
+#poder ejecutar el codigo de prueba
 import os
 
 
