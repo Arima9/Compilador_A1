@@ -23,31 +23,57 @@ class Traductor:
     @staticmethod
     def traducir(ensamblador: list):
         """
-        :param ensamblador: Este parametro es el codigo rudo en ensamblador del programa
-        del procesador que se va a convertir.
-        :return: El metodo devuelve una lista con los codigos en hexadecimal deñ programa
+        :param ensamblador: Este parametro es el codigo rudo en ensamblador
+        del programa del procesador que se va a convertir.
+        :return: El metodo devuelve una lista con los codigos en hexadecimal
+        del programa.
         """
 
-        # Lista de Mnemonicos para comparar en las instrucciones
+        # Lista de palabras reservadas para las instrucciones
         Mnemonics = ['MOV', 'ADD', 'AND', 'OR', 'NOT', 'XOR', 'LSL', 'LSR', 'JMP', 'JC', 'JZ', 'JSR']
 
         # Variables necesarias y listas
         ensamble = []  # Aqui se guardara el codigo hexadecimal traducido
-        cntprg = 0  # Esta variable se encarga de llevar el conteo de la direccion de memoria que se esta traduciendo
-        # Diccionario de etiquetas, formato--> "Etiqueta" : "Direccion"
-        labels = {}
+        cntprg = 0  # Esta variable se encarga de llevar el conteo de la 
+        #direccion de memoria que se esta traduciendo
+       
+        labels = {}# Diccionario de etiquetas, formato--> "Etiqueta" : "Direccion"
 
         # Iterador for de las lineas del archivo ensamblador
         for Linea in ensamblador:
             word = ''  # Cadena temporal donde se guardaran los caracteres alfanumericos par su procesado
             cadena = ''  # Variable temporal donde se colocan los codigos hexadecimales traducidos
             instr = ''  # Cadena temporal donde se colocaran las instrucciones formateadas correctamente
+            posChar = 0
 
             """
             Se realiza el preprocesamiento del codigo por linea para adaptarlo al siguiente paso.
             Iterador de los caracteres de la linea en analisis
             """
             for char in Linea:
+                
+                if posChar == 0:
+                    if char.isalpha():
+                        word += char
+                    else:
+                        #Primer elemento no es una letra, despliega error
+
+                elif char.isalnum():
+                    word += char
+
+                elif char == ':':
+                    if labels.get( word, -1) != -1:
+                        labels[word] = cntprg
+                        word = ''
+                    else:
+                        #Etiqueta repetida, error de compilacion
+
+                elif char == ' ':
+                    #Determinar si se utilizara comprobacion caracter a caracter
+                    #o se utilizara una funcion especial o un metodo interno.
+                """
+Se omitira este codigo por el momento, para trabajar con el nuevo codigo
+
 
                 if char.isalnum():
                     word += char
@@ -292,6 +318,7 @@ class Traductor:
             else:
                 Traductor.desp_errores(instr, len(ensamble), 2)
                 return -1
+            """
 
             ensamble.append(cadena)
 

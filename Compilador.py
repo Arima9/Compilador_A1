@@ -78,15 +78,31 @@ if __name__ == '__main__':
             #fuente.
             CodEnsa = Compilador.leer_archivo()
 
-
+            #Si el metodo leer_archivo regresa un 0, se despliega un mensaje de
+            #error.
             if CodEnsa == 0:
                 print(f'El archivo {RutaEnsamblador} no contiene información...')
+            
+            #En caso de no haber error entonces se realiza la conversion
             else:
+                #Se llama al metodo traducir de Traductor, se le da una lista
+                #con el codigo fuente a traducir, y el retorno se guarda en
+                #CodHexa
                 CodHexa = Traductor.traducir(CodEnsa)
+                
+                #En caso de que haber retornado un codigo -1 se despliega un
+                #mensaje de error.
+                """
+                Agregar distintos tipos de errores al if
+                """
                 if CodHexa == -1:
                     print('No se ha podido realizar la conversión...')
+                
+                #En caso de no haber error, se escribe el codigo hexadecimal
+                #en el archivo nuevo creado recien
                 else:
                     Compilador.escribirarchivo(CodHexa)
-                    print(f'Se ha generado el archivo {RutaHexadecimal} exitosamente...')
+                    print("Se ha generado el archivo {RutaHexadecimal} 
+                            exitosamente...")
     except Exception as e:
         print(f'Hubo un error {e}')
